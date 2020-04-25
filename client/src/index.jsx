@@ -71,6 +71,7 @@ class App extends React.Component {
           <Search
             swapFavorites={this.swapFavorites}
             showFaves={this.state.showFaves}
+            getMovies={this.getMovies}
           />
           <Movies
             movies={

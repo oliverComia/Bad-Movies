@@ -1,14 +1,16 @@
 import React from "react";
 const axios = require("axios");
-import SearchList from "./SearchList.jsx";
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       genres: [],
+      selectedGenreId: "",
     };
     this.getGenres = this.getGenres.bind(this);
+    this.pickedGenre = this.pickedGenre.bind(this);
+    this.chooseGenre = this.chooseGenre.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +32,17 @@ class Search extends React.Component {
       });
   }
 
+  pickedGenre() {
+    console.log("Chosen genre: ", this.state.selectedGenreId);
+    this.props.getMovies(this.state.selectedGenreId);
+  }
+
+  chooseGenre(e) {
+    this.setState({
+      selectedGenreId: e.target.value,
+    });
+  }
+
   render() {
     return (
       <div className="search">
@@ -42,15 +55,18 @@ class Search extends React.Component {
         </button>
         <br />
         <br />
-        <select>
+        <select onChange={this.chooseGenre}>
           {this.state.genres.map((genre) => {
-            return <SearchList genre={genre} key={genre.id} />;
+            return (
+              <option value={genre.id} key={genre.id}>
+                {genre.name}
+              </option>
+            );
           })}
         </select>
         <br />
         <br />
-
-        <button>Search</button>
+        <button onClick={this.pickedGenre}>Search</button>
       </div>
     );
   }
