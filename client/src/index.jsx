@@ -13,6 +13,7 @@ class App extends React.Component {
       movies: [{ deway: "movies" }],
       favorites: [{ deway: "favorites" }],
       showFaves: false,
+      defaultGenre: 28,
     };
 
     // you might have to do something important here!
@@ -24,7 +25,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getMovies(28);
+    this.getMovies(this.state.defaultGenre);
     this.getFavorites();
   }
 
