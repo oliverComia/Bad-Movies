@@ -77,8 +77,9 @@ class App extends React.Component {
   }
 
   render() {
+    let style = { overflowY: "scroll" };
     return (
-      <div className="app">
+      <div className="app" style={style}>
         <header className="navbar">
           <h1>Bad Movies</h1>
         </header>
