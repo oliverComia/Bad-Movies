@@ -20,10 +20,12 @@ class App extends React.Component {
     this.saveMovie = this.saveMovie.bind(this);
     this.deleteMovie = this.deleteMovie.bind(this);
     this.swapFavorites = this.swapFavorites.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
   }
 
   componentDidMount() {
-    this.getMovies(35);
+    this.getMovies(28);
+    this.getFavorites();
   }
 
   getMovies(genreId) {
@@ -42,6 +44,20 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log("Error in GET Movies: ", err);
+      });
+  }
+
+  getFavorites() {
+    return axios
+      .get("/movies/favorites")
+      .then((result) => {
+        console.log("GET favorites: ", result);
+        this.setState({
+          favorites: result.data,
+        });
+      })
+      .catch((err) => {
+        console.log("Error in GET favorites: ", err);
       });
   }
 
@@ -78,6 +94,7 @@ class App extends React.Component {
               this.state.showFaves ? this.state.favorites : this.state.movies
             }
             showFaves={this.state.showFaves}
+            getFavorites={this.getFavorites}
           />
         </div>
       </div>

@@ -31,6 +31,23 @@ module.exports = {
       })
       .catch((err) => res.sendStatus(404));
   },
-  saveMovie: (req, res) => {},
+  saveMovie: (req, res) => {
+    movieModel
+      .create(req.body)
+      .then((result) => {
+        res.sendStatus(201);
+      })
+      .catch((err) => {
+        res.sendStatus(404);
+      });
+  },
   deleteMovie: (req, res) => {},
+  getFavorites: (req, res) => {
+    movieModel
+      .getFavorites()
+      .then((result) => {
+        res.json(result);
+      })
+      .catch(() => res.sendStatus(500));
+  },
 };

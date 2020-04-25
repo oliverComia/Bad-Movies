@@ -16,7 +16,13 @@ class Movies extends React.Component {
     return (
       <ul className="movies">
         {this.props.movies.map((movie, i) => {
-          return <Movie movie={movie} key={i} />;
+          return (
+            <Movie
+              movie={movie}
+              key={i}
+              getFavorites={this.props.getFavorites}
+            />
+          );
         })}
       </ul>
     );
